@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>O Início da Vitória – Workshop Imobiliário</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #fff;
+      color: #1a1a1a;
+      line-height: 1.6;
+    }
+
+    /* ─── UTILITÁRIOS ─── */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+    .tag {
+      display: inline-block;
+      background: #FF6B00;
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      border-radius: 3px;
+      margin-bottom: 18px;
+    }
+    .btn-cta {
+      display: inline-block;
+      background: #FF6B00;
+      color: #fff;
+      font-size: 17px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      padding: 18px 44px;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+      border: none;
+      cursor: pointer;
+    }
+    .btn-cta:hover { background: #e05e00; transform: translateY(-2px); }
+    .btn-cta-outline {
+      display: inline-block;
+      background: transparent;
+      color: #FF6B00;
+      font-size: 17px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      padding: 17px 44px;
+      border-radius: 6px;
+      border: 2px solid #FF6B00;
+      text-decoration: none;
+      transition: background 0.2s, color 0.2s;
+      cursor: pointer;
+    }
+    .btn-cta-outline:hover { background: #FF6B00; color: #fff; }
+
+    .section-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #FF6B00;
+      margin-bottom: 10px;
+      display: block;
+    }
+    h2.section-title {
+      font-size: clamp(26px, 4vw, 40px);
+      font-weight: 900;
+      line-height: 1.2;
+      color: #111;
+      margin-bottom: 16px;
+    }
+    h2.section-title.light { color: #fff; }
+    p.section-desc {
+      font-size: 17px;
+      color: #555;
+      max-width: 640px;
+    }
+    p.section-desc.light { color: #ccc; }
+
+    /* ─── BLOCK 1 – HERO ─── */
+    #hero {
+      background: #fff;
+      padding: 70px 0 60px;
+      border-bottom: 1px solid #eee;
+    }
+    .hero-inner {
+      display: flex;
+      align-items: center;
+      gap: 60px;
+    }
+    .hero-text { flex: 1; }
+    .hero-text h1 {
+      font-size: clamp(28px, 4.5vw, 48px);
+      font-weight: 900;
+      line-height: 1.18;
+      color: #111;
+      margin-bottom: 22px;
+    }
+    .hero-text h1 span { color: #FF6B00; }
+    .hero-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 28px;
+    }
+    .hero-meta span {
+      font-size: 15px;
+      font-weight: 500;
+      color: #444;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .hero-meta span i { color: #FF6B00; width: 16px; }
+
+    /* FOTO HERO – CORRIGIDA E ALINHADA */
+    .hero-photo-wrap {
+      flex-shrink: 0;
+      width: 300px;
+      /* garante que o pseudo-elemento não vaze para fora */
+      position: relative;
+      /* margem inferior para a sombra decorativa não cortar */
+      padding-bottom: 20px;
+      padding-right: 20px;
+    }
+    /* decoração atrás – deslocada para baixo-direita */
+    .hero-photo-wrap::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 300px;
+      height: calc(100% - 20px);
+      border: 3px solid #FF6B00;
+      border-radius: 10px;
+      z-index: 0;
+    }
+    .hero-photo-box {
+      position: relative;
+      z-index: 1;
+      width: 300px;
+      height: 380px;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+      background: #f0f0f0;
+    }
+    .hero-photo-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+    }
+
+    /* ─── BLOCK 2 – PROMESSA ─── */
+    #promessa {
+      background: #f7f7f7;
+      padding: 80px 0;
+    }
+    .promessa-inner {
+      display: flex;
+      align-items: flex-start;
+      gap: 60px;
+    }
+    .promessa-text { flex: 1; }
+    .video-placeholder {
+      flex-shrink: 0;
+      width: 380px;
+      height: 213px;
+      background: #ddd;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 12px;
+      color: #888;
+      border: 2px dashed #ccc;
+    }
+    .video-placeholder i { font-size: 40px; color: #FF6B00; }
+    .video-placeholder span { font-size: 14px; font-weight: 600; }
+
+    /* ─── BLOCK 3 – DOR ─── */
+    #dor {
+      background: #fff;
+      padding: 80px 0;
+    }
+    .dor-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 20px;
+      margin: 32px 0;
+    }
+    .dor-card {
+      background: #f7f7f7;
+      border-left: 4px solid #FF6B00;
+      border-radius: 6px;
+      padding: 22px 20px;
+      font-size: 15px;
+      font-weight: 600;
+      color: #222;
+    }
+    .dor-card i { color: #FF6B00; margin-right: 8px; }
+    .dor-list {
+      list-style: none;
+      margin: 20px 0 28px;
+    }
+    .dor-list li {
+      padding: 10px 0;
+      font-size: 16px;
+      color: #333;
+      border-bottom: 1px solid #f0f0f0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .dor-list li i { color: #FF6B00; }
+    .dor-conclusion {
+      background: #111;
+      color: #fff;
+      border-radius: 8px;
+      padding: 24px 28px;
+      font-size: 18px;
+      font-weight: 700;
+      margin-top: 12px;
+    }
+    .dor-conclusion span { color: #FF6B00; }
+
+    /* ─── CTA BAND ─── */
+    .cta-band {
+      padding: 64px 0;
+      text-align: center;
+    }
+    .cta-band.dark {
+      background: #111;
+    }
+    .cta-band.light {
+      background: #f7f7f7;
+    }
+    .cta-band h3 {
+      font-size: clamp(22px, 3.5vw, 34px);
+      font-weight: 900;
+      margin-bottom: 10px;
+    }
+    .cta-band.dark h3 { color: #fff; }
+    .cta-band.light h3 { color: #111; }
+    .cta-band p {
+      font-size: 16px;
+      margin-bottom: 28px;
+    }
+    .cta-band.dark p { color: #aaa; }
+    .cta-band.light p { color: #555; }
+    .cta-band small {
+      display: block;
+      margin-top: 14px;
+      font-size: 13px;
+    }
+    .cta-band.dark small { color: #777; }
+    .cta-band.light small { color: #999; }
+
+    /* ─── BLOCK 5 – QUEBRA DE CRENÇA ─── */
+    #crenca {
+      background: #fff;
+      padding: 80px 0;
+    }
+    .crenca-inner {
+      display: flex;
+      align-items: center;
+      gap: 60px;
+    }
+    .crenca-text { flex: 1; }
+    .crenca-text .highlight {
+      background: #fff7f0;
+      border-left: 4px solid #FF6B00;
+      border-radius: 6px;
+      padding: 20px 22px;
+      font-size: 17px;
+      font-weight: 600;
+      color: #111;
+      margin: 24px 0;
+    }
+    .crenca-photo {
+      flex-shrink: 0;
+      width: 260px;
+      height: 320px;
+      border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
+      overflow: hidden;
+      border: 4px solid #FF6B00;
+      box-shadow: 0 8px 30px rgba(255,107,0,0.2);
+    }
+    .crenca-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 10%;
+      display: block;
+    }
+    .crenca-photo-placeholder {
+      flex-shrink: 0;
+      width: 260px;
+      height: 320px;
+      border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
+      overflow: hidden;
+      border: 4px solid #FF6B00;
+      box-shadow: 0 8px 30px rgba(255,107,0,0.2);
+      background: #f0f0f0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 10px;
+      color: #bbb;
+    }
+    .crenca-photo-placeholder i { font-size: 36px; color: #FF6B00; }
+    .crenca-photo-placeholder span { font-size: 13px; font-weight: 600; }
+
+    /* ─── BLOCK 6 – APRENDER ─── */
+    #aprender {
+      background: #f7f7f7;
+      padding: 80px 0;
+    }
+    .aprender-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      margin-top: 36px;
+    }
+    .aprender-item {
+      background: #fff;
+      border-radius: 8px;
+      padding: 22px 24px;
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+      transition: box-shadow 0.2s;
+    }
+    .aprender-item:hover { box-shadow: 0 6px 24px rgba(0,0,0,0.1); }
+    .check-icon {
+      width: 32px;
+      height: 32px;
+      background: #FF6B00;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .check-icon i { color: #fff; font-size: 14px; }
+    .aprender-item p { font-size: 15px; color: #333; font-weight: 500; }
+
+    /* ─── BLOCK 8 – GRANDE PROMESSA ─── */
+    #promessa-grande {
+      background: #111;
+      padding: 80px 0;
+      text-align: center;
+    }
+    .promessa-grande-num {
+      font-size: clamp(72px, 12vw, 120px);
+      font-weight: 900;
+      color: #FF6B00;
+      line-height: 1;
+    }
+    .promessa-grande-desc {
+      font-size: clamp(18px, 3vw, 28px);
+      font-weight: 700;
+      color: #fff;
+      margin-top: 8px;
+    }
+    .promessa-grande-sub {
+      font-size: 16px;
+      color: #888;
+      margin-top: 16px;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* ─── BLOCK 9 – POSICIONAMENTO ─── */
+    #posicionamento {
+      background: #f7f7f7;
+      padding: 80px 0;
+    }
+    .posicionamento-inner {
+      display: flex;
+      align-items: center;
+      gap: 60px;
+    }
+    .posicionamento-text { flex: 1; }
+    .stat-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin: 28px 0;
+    }
+    .stat-card {
+      background: #fff;
+      border-radius: 8px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+    }
+    .stat-num {
+      font-size: 36px;
+      font-weight: 900;
+      color: #FF6B00;
+      line-height: 1.1;
+    }
+    .stat-label {
+      font-size: 13px;
+      color: #666;
+      margin-top: 4px;
+    }
+    .posicionamento-photo {
+      flex-shrink: 0;
+      width: 300px;
+      height: 360px;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 10px 36px rgba(0,0,0,0.14);
+    }
+    .posicionamento-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+    }
+    .posicionamento-photo-placeholder {
+      flex-shrink: 0;
+      width: 300px;
+      height: 360px;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 10px 36px rgba(0,0,0,0.14);
+      background: #e0e0e0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 12px;
+      color: #aaa;
+    }
+    .posicionamento-photo-placeholder i { font-size: 44px; color: #FF6B00; }
+    .posicionamento-photo-placeholder span { font-size: 14px; font-weight: 600; }
+
+    /* ─── BLOCK 10 – CONVITE / DETALHES ─── */
+    #convite {
+      background: #fff;
+      padding: 80px 0;
+    }
+    .event-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      margin-top: 36px;
+    }
+    .event-card {
+      background: #f7f7f7;
+      border-radius: 10px;
+      padding: 28px 22px;
+      text-align: center;
+    }
+    .event-card i {
+      font-size: 30px;
+      color: #FF6B00;
+      margin-bottom: 12px;
+      display: block;
+    }
+    .event-card .ev-label {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .event-card .ev-value {
+      font-size: 17px;
+      font-weight: 700;
+      color: #111;
+    }
+    .convite-headline {
+      font-size: clamp(20px, 3vw, 30px);
+      font-weight: 900;
+      color: #111;
+      margin-bottom: 10px;
+    }
+    .convite-sub {
+      font-size: 16px;
+      color: #555;
+      margin-bottom: 36px;
+    }
+
+    /* ─── BLOCK FINAL – CTA ─── */
+    #cta-final {
+      background: #111;
+      padding: 90px 0;
+      text-align: center;
+    }
+    #cta-final h2 {
+      font-size: clamp(26px, 4vw, 42px);
+      font-weight: 900;
+      color: #fff;
+      margin-bottom: 14px;
+    }
+    #cta-final p {
+      font-size: 17px;
+      color: #aaa;
+      max-width: 520px;
+      margin: 0 auto 32px;
+    }
+    #cta-final .cta-note {
+      font-size: 13px;
+      color: #666;
+      margin-top: 18px;
+    }
+    #cta-final .arrow-hint {
+      font-size: 28px;
+      color: #FF6B00;
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: #0a0a0a;
+      padding: 24px;
+      text-align: center;
+      font-size: 13px;
+      color: #555;
+      border-top: 1px solid #222;
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 768px) {
+      .hero-inner,
+      .promessa-inner,
+      .crenca-inner,
+      .posicionamento-inner { flex-direction: column; }
+
+      .hero-photo-wrap {
+        width: 100%;
+        max-width: 280px;
+        margin: 0 auto;
+        padding-bottom: 18px;
+        padding-right: 18px;
+      }
+      .hero-photo-box { width: 280px; height: 340px; }
+
+      .video-placeholder { width: 100%; }
+      .crenca-photo, .crenca-photo-placeholder { width: 220px; height: 270px; margin: 0 auto; }
+      .posicionamento-photo, .posicionamento-photo-placeholder { width: 100%; height: 300px; }
+      .stat-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════
+     BLOCO 1 – HERO
+════════════════════════════════════════════ -->
+<section id="hero">
+  <div class="container">
+    <div class="hero-inner">
+      <!-- TEXTO -->
+      <div class="hero-text">
+        <h1>O Início da Vitória: Como Vender Imóveis no <span>Novo Cenário</span> do Mercado Imobiliário</h1>
+        <div class="hero-meta">
+          <span><i class="fas fa-map-marker-alt"></i> Curitiba – Avenida Iguaçu, 2820 (Auditório)</span>
+          <span><i class="fas fa-calendar-alt"></i> 29 de Abril</span>
+          <span><i class="fas fa-clock"></i> 08h00 às 11h00</span>
+        </div>
+        <a href="https://www.sympla.com.br/evento/workshop-o-inicio-da-vitoria-como-vender-imoveis-no-novo-cenario/3381769?_gl=1*1bzvixf*_gcl_au*MzUzODU3MTU1LjE3Njg4NTI0NjguODIwNzgxMzk0LjE3NzU4MjY3ODUuMTc3NTgyNjc4NA..*_ga*MjA1NjU3NzU5Ny4xNzY4ODUyNDY5*_ga_KXH10SQTZF*czE3NzU4MzMxNjMkbzYkZzEkdDE3NzU4MzMxNjUkajU4JGwwJGgxMTQ5MzAxMTUy" target="_blank" class="btn-cta">🚀 Garanta sua vaga agora</a>
+      </div>
+
+      <!-- FOTO HERO – alinhada dentro do quadrado -->
+      <div class="hero-photo-wrap">
+        <div class="hero-photo-box">
+          <img
+            src="images/foto-hero.jpg"
+            alt="Foto do mentor"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     BLOCO 2 – PROMESSA / HEADLINE
+════════════════════════════════════════════ -->
+<section id="promessa">
+  <div class="container">
+    <div class="promessa-inner">
+      <div class="promessa-text">
+        <h2 class="section-title">O mercado mudou e quem não se atualiza, fica para trás.</h2>
+        <p class="section-desc">Se você é corretor de imóveis e quer aprender como vender no novo cenário… esse workshop é pra você.</p>
+
+        <div style="margin-top:28px;">
+          <p class="section-desc">Aprenda técnicas de vendas poderosas, adaptadas ao novo perfil do comprador e aumente sua conversão já nas próximas negociações.</p>
+        </div>
+      </div>
+
+      <!-- ESPAÇO PARA VÍDEO -->
+      <div class="video-placeholder">
+        <i class="fas fa-play-circle"></i>
+        <span>Insira o link do vídeo aqui</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     BLOCO 3 – DOR / IDENTIFICAÇÃO
+════════════════════════════════════════════ -->
+<section id="dor">
+  <div class="container">
+    <h2 class="section-title">Hoje o comprador está:</h2>
+
+    <div class="dor-cards">
+      <div class="dor-card"><i class="fas fa-fire"></i>Mais exigente</div>
+      <div class="dor-card"><i class="fas fa-brain"></i>Mais informado</div>
+      <div class="dor-card"><i class="fas fa-shield-alt"></i>Mais desconfiado</div>
+    </div>
+
+    <p style="font-size:18px; font-weight:700; color:#111; margin-bottom:16px;">
+      👉 O que funcionava antes… não funciona mais.
+    </p>
+    <p style="font-size:16px; color:#555; margin-bottom:12px;">Se você sente que:</p>
+
+    <ul class="dor-list">
+      <li><i class="fas fa-times-circle"></i> Está perdendo vendas mesmo com bons produtos</li>
+      <li><i class="fas fa-times-circle"></i> Não consegue gerar conexão com o cliente</li>
+      <li><i class="fas fa-times-circle"></i> Enfrenta muitas objeções e não sabe contornar</li>
+      <li><i class="fas fa-times-circle"></i> Depende de sorte para fechar negócio</li>
+    </ul>
+
+    <div class="dor-conclusion">
+      Então você precisa <span>se atualizar.</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     CTA BAND 1
+════════════════════════════════════════════ -->
+<div class="cta-band dark">
+  <div class="container">
+    <h3>Chegou a hora de mudar o jogo.</h3>
+    <p>Vagas limitadas para garantir a qualidade da experiência.</p>
+    <a href="https://www.sympla.com.br/evento/workshop-o-inicio-da-vitoria-como-vender-imoveis-no-novo-cenario/3381769?_gl=1*1bzvixf*_gcl_au*MzUzODU3MTU1LjE3Njg4NTI0NjguODIwNzgxMzk0LjE3NzU4MjY3ODUuMTc3NTgyNjc4NA..*_ga*MjA1NjU3NzU5Ny4xNzY4ODUyNDY5*_ga_KXH10SQTZF*czE3NzU4MzMxNjMkbzYkZzEkdDE3NzU4MzMxNjUkajU4JGwwJGgxMTQ5MzAxMTUy" target="_blank" class="btn-cta">🚀 Quero garantir minha vaga</a>
+    <small>📍 29 de Abril · 08h00 às 11h00 · Curitiba · Av. Iguaçu, 2820</small>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     BLOCO 5 – QUEBRA DE CRENÇA
+════════════════════════════════════════════ -->
+<section id="crenca">
+  <div class="container">
+    <div class="crenca-inner">
+      <div class="crenca-text">
+        <h2 class="section-title">Não é falta de esforço.<br/>É falta de técnica.</h2>
+        <div class="highlight">
+          Não é falta de esforço.<br/>
+          É falta de técnica adaptada ao novo mercado.
+        </div>
+        <p class="section-desc">Hoje, não basta ser corretor…</p>
+        <p style="font-size:17px; font-weight:700; color:#111; margin-top:14px;">
+          👉 Você precisa entender de comportamento, comunicação e tomada de decisão.
+        </p>
+      </div>
+      <!-- Foto mentor quebra de crença -->
+      <div class="crenca-photo">
+        <img src="images/foto-crenca.jpg" alt="Foto do Mentor" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     BLOCO 6 – O QUE VOCÊ VAI APRENDER
+════════════════════════════════════════════ -->
+<section id="aprender">
+  <div class="container">
+    <h2 class="section-title">Neste workshop, você vai aprender:</h2>
+
+    <div class="aprender-grid">
+      <div class="aprender-item">
+        <div class="check-icon"><i class="fas fa-check"></i></div>
+        <p>Como vender para um cliente mais exigente e informado</p>
+      </div>
+      <div class="aprender-item">
+        <div class="check-icon"><i class="fas fa-check"></i></div>
+        <p>Técnicas de vendas adaptadas ao novo perfil do consumidor</p>
+      </div>
+      <div class="aprender-item">
+        <div class="check-icon"><i class="fas fa-check"></i></div>
+        <p>Como criar conexão real com o cliente</p>
+      </div>
+      <div class="aprender-item">
+        <div class="check-icon"><i class="fas fa-check"></i></div>
+        <p>Como contornar objeções antes mesmo que elas apareçam</p>
+      </div>
+      <div class="aprender-item">
+        <div class="check-icon"><i class="fas fa-check"></i></div>
+        <p>Como fechar mais negócios com segurança</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     CTA BAND 2
+════════════════════════════════════════════ -->
+<div class="cta-band light">
+  <div class="container">
+    <h3>Pronto para vender o dobro?</h3>
+    <p>Aplique as técnicas certas e transforme sua corretagem.</p>
+    <a href="https://www.sympla.com.br/evento/workshop-o-inicio-da-vitoria-como-vender-imoveis-no-novo-cenario/3381769?_gl=1*1bzvixf*_gcl_au*MzUzODU3MTU1LjE3Njg4NTI0NjguODIwNzgxMzk0LjE3NzU4MjY3ODUuMTc3NTgyNjc4NA..*_ga*MjA1NjU3NzU5Ny4xNzY4ODUyNDY5*_ga_KXH10SQTZF*czE3NzU4MzMxNjMkbzYkZzEkdDE3NzU4MzMxNjUkajU4JGwwJGgxMTQ5MzAxMTUy" target="_blank" class="btn-cta">🎯 Garantir minha vaga agora</a>
+    <small>As vagas são limitadas para manter a qualidade da experiência.</small>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     BLOCO 8 – GRANDE PROMESSA
+════════════════════════════════════════════ -->
+<section id="promessa-grande">
+  <div class="container">
+    <div class="promessa-grande-num">2×</div>
+    <div class="promessa-grande-desc">Quem sabe usar técnicas de vendas… vende o dobro.</div>
+    <p class="promessa-grande-sub">O mercado imobiliário subiu a régua. Quem domina pessoas, domina o mercado.</p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     BLOCO 9 – POSICIONAMENTO
+════════════════════════════════════════════ -->
+<section id="posicionamento">
+  <div class="container">
+    <div class="posicionamento-inner">
+      <div class="posicionamento-text">
+        <h2 class="section-title">O mercado imobiliário subiu a régua.</h2>
+        <p class="section-desc" style="margin-bottom:0;">Hoje, além de dominar produto e nicho…</p>
+        <p style="font-size:17px; font-weight:700; color:#111; margin: 14px 0 24px;">
+          👉 Você precisa dominar pessoas.
+        </p>
+
+        <div class="stat-grid">
+          <div class="stat-card">
+            <div class="stat-num">73%</div>
+            <div class="stat-label">dos corretores perdem vendas por falta de técnica</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num">2×</div>
+            <div class="stat-label">mais resultados com as técnicas certas</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num">1 dia</div>
+            <div class="stat-label">para mudar o seu posicionamento</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num">+</div>
+            <div class="stat-label">experiência imersiva e presencial</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FOTO DO POSICIONAMENTO -->
+      <div class="posicionamento-photo">
+        <img
+          src="images/foto-posicionamento.jpg"
+          alt="Foto posicionamento"
+        />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     CTA BAND 3
+════════════════════════════════════════════ -->
+<div class="cta-band dark">
+  <div class="container">
+    <h3>Pronto para jogar em outro nível?</h3>
+    <p>Este é o momento de investir em você e na sua carreira.</p>
+    <a href="https://www.sympla.com.br/evento/workshop-o-inicio-da-vitoria-como-vender-imoveis-no-novo-cenario/3381769?_gl=1*1bzvixf*_gcl_au*MzUzODU3MTU1LjE3Njg4NTI0NjguODIwNzgxMzk0LjE3NzU4MjY3ODUuMTc3NTgyNjc4NA..*_ga*MjA1NjU3NzU5Ny4xNzY4ODUyNDY5*_ga_KXH10SQTZF*czE3NzU4MzMxNjMkbzYkZzEkdDE3NzU4MzMxNjUkajU4JGwwJGgxMTQ5MzAxMTUy" target="_blank" class="btn-cta">🔥 Quero participar do workshop</a>
+    <small>Vagas esgotando rapidamente · 29 de Abril · 08h00 às 11h00 · Curitiba</small>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     BLOCO 10 – CONVITE + DETALHES
+════════════════════════════════════════════ -->
+<section id="convite">
+  <div class="container">
+    <div class="convite-headline">Workshop presencial para corretores que querem jogar em outro nível de corretagem.</div>
+    <div class="convite-sub">📍 Detalhes do Evento</div>
+
+    <div class="event-cards">
+      <div class="event-card">
+        <i class="fas fa-calendar-alt"></i>
+        <div class="ev-label">Data</div>
+        <div class="ev-value">29 de Abril</div>
+      </div>
+      <div class="event-card">
+        <i class="fas fa-clock"></i>
+        <div class="ev-label">Horário</div>
+        <div class="ev-value">08h00 às 11h00</div>
+      </div>
+      <div class="event-card">
+        <i class="fas fa-map-marker-alt"></i>
+        <div class="ev-label">Local</div>
+        <div class="ev-value">Av. Iguaçu, 2820<br/>Auditório – Curitiba</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     BLOCO FINAL – CTA
+════════════════════════════════════════════ -->
+<section id="cta-final">
+  <div class="container">
+    <h2>🚀 Garanta sua vaga agora</h2>
+    <p>As vagas são limitadas para manter a qualidade da experiência.</p>
+    <span class="arrow-hint"><i class="fas fa-arrow-down"></i></span>
+    <a href="https://www.sympla.com.br/evento/workshop-o-inicio-da-vitoria-como-vender-imoveis-no-novo-cenario/3381769?_gl=1*1bzvixf*_gcl_au*MzUzODU3MTU1LjE3Njg4NTI0NjguODIwNzgxMzk0LjE3NzU4MjY3ODUuMTc3NTgyNjc4NA..*_ga*MjA1NjU3NzU5Ny4xNzY4ODUyNDY5*_ga_KXH10SQTZF*czE3NzU4MzMxNjMkbzYkZzEkdDE3NzU4MzMxNjUkajU4JGwwJGgxMTQ5MzAxMTUy" target="_blank" class="btn-cta" style="font-size:20px; padding:22px 56px;">
+      👉 Confirmar minha presença
+    </a>
+    <p class="cta-note">Clique no botão acima e confirme sua presença · 29 de Abril · 08h00 às 11h00 · Curitiba</p>
+  </div>
+</section>
+
+<footer>
+  <p>Workshop · O Início da Vitória · Curitiba, 29 de Abril · Av. Iguaçu, 2820</p>
+</footer>
+
+</body>
+</html>
